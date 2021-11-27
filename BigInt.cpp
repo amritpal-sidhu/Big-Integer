@@ -365,7 +365,9 @@ void BigInt::sum(const BigInt& rhs)
 }
 
 /**
- * Used for multiplication
+ * Used for multiplication where there is no
+ * need to instantiate another BigInt object
+ * to hold temporary digits.
  */
 void BigInt::sum(const std::vector<u_digit_t>& vec)
 {
