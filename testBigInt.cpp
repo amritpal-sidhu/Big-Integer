@@ -16,6 +16,7 @@ static void test_constructors(void);
 static void test_assignment_overloading(void);
 static void test_comparison_overloading(void);
 static void test_stream_overloading(void);
+static void test_accumulation_overloading(void);
 static void test_addition_with_two_operands(void);
 static void test_subtraction_with_two_operands(void);
 static void test_multiplication_with_two_operands(void);
@@ -31,6 +32,7 @@ int main()
     test_assignment_overloading();
     test_comparison_overloading();
     test_stream_overloading();   
+    test_accumulation_overloading();
     test_addition_with_two_operands();
     test_subtraction_with_two_operands();
     test_multiplication_with_two_operands();
@@ -209,6 +211,51 @@ static void test_stream_overloading(void)
     }
 
     cout << "PASS  test_stream_overloading()\n";
+}
+
+/**
+ * 
+ * 
+ */
+static void test_accumulation_overloading(void)
+{
+
+    BigInt actual("-22398237498237489273949223424");
+    BigInt operand;
+    const size_t size = 8-5;
+    const string expected[size] = {
+        "66830723283970822525867044053828931072", // multiply by -2983749203
+        "66830723283970822433479545926330758178", // add -92387498127498172894
+        "66830714000491010068588271035055938931", // subtract 9283479812364891274891274819247
+        // "",
+        // "",
+        // "",
+        // "",
+        // ""
+    };
+
+    operand = "-2983749203";
+    actual *= operand;
+    if (!ASSERT_EQUAL_STRING(expected[0], actual.to_str())) {
+        cout << "FAIL  1st test within test_accumulation_overloading()\n";
+        exit(134);
+    }
+
+    operand = "-92387498127498172894";
+    actual += operand;
+    if (!ASSERT_EQUAL_STRING(expected[1], actual.to_str())) {
+        cout << "FAIL  2nd test within test_accumulation_overloading()\n";
+        exit(134);
+    }
+
+    operand = "9283479812364891274891274819247";
+    actual -= operand;
+    if (!ASSERT_EQUAL_STRING(expected[2], actual.to_str())) {
+        cout << "FAIL  3rd test within test_accumulation_overloading()\n";
+        exit(134);
+    }
+
+    cout << "PASS  test_accumulation_overloading()\n";
 }
 
 static void test_addition_with_two_operands(void)

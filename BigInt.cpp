@@ -169,6 +169,7 @@ void BigInt::operator*=(const BigInt& rhs)
 {
     std::vector<u_digit_t> products;
     u_digit_t product, carry;
+    BigInt result; // TODO: perform the operation in place
 
     for (size_t i = 0; i < this->size(); ++i) {
 
@@ -186,10 +187,11 @@ void BigInt::operator*=(const BigInt& rhs)
 
         if (carry > 0) products.push_back(carry);
 
-        this->sum(products);
+        result.sum(products);
     }
 
-    this->sign = (this->sign == rhs.sign) ? POS : NEG;
+    result.sign = (this->sign == rhs.sign) ? POS : NEG;
+    *this = result;
 }
 
 void BigInt::operator/=(const BigInt& rhs)
