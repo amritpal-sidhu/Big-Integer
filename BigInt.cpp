@@ -138,9 +138,10 @@ BigInt BigInt::operator*(const BigInt& rhs) const
 
 BigInt BigInt::operator/(const BigInt& rhs) const
 {
-    BigInt result;
+    BigInt result(*this);
 
-    result = rhs; // temporary
+    while (result >= rhs)
+        result -= rhs;
 
     return result;
 }

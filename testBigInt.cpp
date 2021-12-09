@@ -36,7 +36,7 @@ int main()
     test_addition_with_two_operands();
     test_subtraction_with_two_operands();
     test_multiplication_with_two_operands();
-    // test_division_with_two_operands(); 
+    test_division_with_two_operands(); 
 
     return 0;
 }
@@ -333,8 +333,6 @@ static void test_subtraction_with_two_operands(void)
 
         if (!ASSERT_EQUAL_STRING(expected_buf[i], actual.to_str())) {
             cout << "FAIL  1st test within test_subtraction_with_two_operands()\n";
-            print_expected_and_actual(operand1.to_str(), operand2.to_str());
-            print_expected_and_actual(expected_buf[i], actual.to_str());
             exit(134);
         }
     }
@@ -417,6 +415,7 @@ static void test_division_with_two_operands(void)
 
         if (!ASSERT_EQUAL_STRING(expected_buf[i], actual.to_str())) {
             cout << "FAIL  1st test within test_division_with_two_operands()\n";
+            print_expected_and_actual(expected_buf[i], actual.to_str());
             exit(134);
         }
     }
