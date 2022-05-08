@@ -138,10 +138,20 @@ BigInt BigInt::operator*(const BigInt& rhs) const
 
 BigInt BigInt::operator/(const BigInt& rhs) const
 {
-    BigInt result(*this);
+    BigInt lhs(*this);
+    BigInt _rhs(rhs);
+    BigInt result;
 
-    while (result >= rhs)
-        result -= rhs;
+    lhs.sign = POS;
+    _rhs.sign = POS;
+
+    while (lhs >= _rhs) {
+        lhs.dif(_rhs);
+        result.sum(1);
+    }
+
+    if (result != 0 && (this->sign != rhs.sign))
+        result.sign = NEG;
 
     return result;
 }
