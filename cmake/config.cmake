@@ -24,6 +24,7 @@ macro(run_tests_macro)
                                COMMAND ruby ${GENERATE_TEST_RUNNER_SCRIPT}
                                             ${TEST_DIR}/test_${FILENAME}.${SRC_EXT}
                                             ${TEST_RUNNER_DIR}/test_${FILENAME}_runner.${SRC_EXT}
+                               DEPENDS ${TEST_DIR}/test_${FILENAME}.${SRC_EXT}
                                VERBATIM)
 
             add_executable(test_${FILENAME}_runner
@@ -33,7 +34,6 @@ macro(run_tests_macro)
             target_include_directories(test_${FILENAME}_runner PRIVATE ${UNITY_DIR}/src)
             
             add_custom_command(TARGET test_${FILENAME}_runner POST_BUILD
-                               DEPENDS test_${FILENAME}_runner.${SRC_EXT}
                                WORKING_DIRECTORY ${TEST_DIR}
                                COMMAND $<TARGET_FILE:test_${FILENAME}_runner>
                                VERBATIM USES_TERMINAL)
