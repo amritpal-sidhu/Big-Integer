@@ -76,6 +76,7 @@ void test_assignment_overloading(void)
 void test_comparison_overloading(void)
 {
     const size_t size = 5;
+    string loop_msg;
     const string expected_lhs_buf[size] = {
         "8348428932819232918390812903812908",
         "-84289328192329183908120052334124",
@@ -103,15 +104,17 @@ void test_comparison_overloading(void)
     };
 
     for (size_t i = 0; i < size; ++i) {
+        loop_msg = "Loop iteration " + to_string(i);
         BigInt lhs(expected_lhs_buf[i]);
         BigInt rhs(expected_rhs_buf[i]);
 
-        TEST_ASSERT_EQUAL(lhs == rhs, expected_cmp[i][0]);
-        TEST_ASSERT_EQUAL(lhs != rhs, expected_cmp[i][1]);
-        TEST_ASSERT_EQUAL(lhs < rhs, expected_cmp[i][2]);
-        TEST_ASSERT_EQUAL(lhs <= rhs, expected_cmp[i][3]);
-        TEST_ASSERT_EQUAL(lhs > rhs, expected_cmp[i][4]);
-        TEST_ASSERT_EQUAL(lhs >= rhs, expected_cmp[i][5]);
+        TEST_ASSERT_EQUAL_MESSAGE(lhs == rhs, expected_cmp[i][0], loop_msg.c_str());
+        TEST_ASSERT_EQUAL_MESSAGE(lhs != rhs, expected_cmp[i][1], loop_msg.c_str());
+        TEST_ASSERT_EQUAL_MESSAGE(lhs < rhs, expected_cmp[i][2], loop_msg.c_str());
+        TEST_ASSERT_EQUAL_MESSAGE(lhs <= rhs, expected_cmp[i][3], loop_msg.c_str());
+        TEST_ASSERT_EQUAL_MESSAGE(lhs > rhs, expected_cmp[i][4], loop_msg.c_str());
+        TEST_ASSERT_EQUAL_MESSAGE(lhs >= rhs, expected_cmp[i][5], loop_msg.c_str());
+        resetTest();
     }
 }
 
@@ -170,6 +173,7 @@ void test_accumulation_overloading(void)
 void test_addition_with_two_operands(void)
 {
     const size_t size = 4;
+    string loop_msg;
     BigInt operand1, operand2, actual;
     
     const string expected_buf[size] = {
@@ -195,17 +199,20 @@ void test_addition_with_two_operands(void)
 
 
     for (size_t i = 0; i < size; ++i) {
+        loop_msg = "Loop iteration " + to_string(i);
         operand1 = op1_buf[i];
         operand2 = op2_buf[i];
         actual = operand1 + operand2;
 
-        TEST_ASSERT_EQUAL_STRING(expected_buf[i].c_str(), actual.to_str().c_str());
+        TEST_ASSERT_EQUAL_STRING_MESSAGE(expected_buf[i].c_str(), actual.to_str().c_str(), loop_msg.c_str());
+        resetTest();
     }
 }
 
 void test_subtraction_with_two_operands(void)
 {
     const size_t size = 4;
+    string loop_msg;
     BigInt operand1, operand2, actual;
     
     const string expected_buf[size] = {
@@ -231,17 +238,20 @@ void test_subtraction_with_two_operands(void)
 
 
     for (size_t i = 0; i < size; ++i) {
+        loop_msg = "Loop iteration " + to_string(i);
         operand1 = op1_buf[i];
         operand2 = op2_buf[i];
         actual = operand1 - operand2;
 
-        TEST_ASSERT_EQUAL_STRING(expected_buf[i].c_str(), actual.to_str().c_str());
+        TEST_ASSERT_EQUAL_STRING_MESSAGE(expected_buf[i].c_str(), actual.to_str().c_str(), loop_msg.c_str());
+        resetTest();
     }
 }
 
 void test_multiplication_with_two_operands(void)
 {
     const size_t size = 4;
+    string loop_msg;
     BigInt operand1, operand2, actual;
     
     const string expected_buf[size] = {
@@ -267,17 +277,20 @@ void test_multiplication_with_two_operands(void)
 
 
     for (size_t i = 0; i < size; ++i) {
+        loop_msg = "Loop iteration " + to_string(i);
         operand1 = op1_buf[i];
         operand2 = op2_buf[i];
         actual = operand1 * operand2;
 
-        TEST_ASSERT_EQUAL_STRING(expected_buf[i].c_str(), actual.to_str().c_str());
+        TEST_ASSERT_EQUAL_STRING_MESSAGE(expected_buf[i].c_str(), actual.to_str().c_str(), loop_msg.c_str());
+        resetTest();
     }
 }
 
 void test_division_with_two_operands(void)
 {
     const size_t size = 4;
+    string loop_msg;
     BigInt operand1, operand2, actual;
     
     const string expected_buf[size] = {
@@ -303,10 +316,12 @@ void test_division_with_two_operands(void)
 
 
     for (size_t i = 0; i < size; ++i) {
+        loop_msg = "Loop iteration " + to_string(i);
         operand1 = op1_buf[i];
         operand2 = op2_buf[i];
         actual = operand1 / operand2;
 
-        TEST_ASSERT_EQUAL_STRING(expected_buf[i].c_str(), actual.to_str().c_str());
+        TEST_ASSERT_EQUAL_STRING_MESSAGE(expected_buf[i].c_str(), actual.to_str().c_str(), loop_msg.c_str());
+        resetTest();
     }
 }
