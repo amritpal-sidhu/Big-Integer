@@ -2,7 +2,6 @@ cmake_minimum_required (VERSION 3.22)
 project(big_int C CXX)
 
 include(cmake/config.cmake)
-include_guard(GLOBAL)
 
 add_subdirectory(Third-Party/Unity)
 target_compile_definitions(unity PUBLIC UNITY_INCLUDE_CONFIG_H)
