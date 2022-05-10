@@ -501,4 +501,3 @@ int BigInt::compare_magnitude(const BigInt& a, const BigInt& b)
 
     return result;
 }
-
